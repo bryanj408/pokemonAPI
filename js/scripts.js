@@ -21,21 +21,28 @@ let pokemonRepository = (function() {
     ];
 
     function add(pokemon) {
-        pokemonList.push(pokemon);
+        if (typeof pokemon == 'object') {
+            pokemonList.push(pokemon);
+        } else {
+            console.log('Add an object this way: {name: String, height: int, types: [string, string]');
+        }
     }
 
     function getAll() {
         return pokemonList;
     }
 
+    function remove() {
+        pokemonList.pop();
+    }
+
     return {
         add: add,
+        remove: remove,
         getAll: getAll
     };
 
 })();
-
-pokemonRepository.add({name: 'Picachu', height: 2, types: ['lightning', 'ground']});
 
 //accesses pokemonRepository with getAll() and loops through pokemonList with forEach by
 //injecting specific details in the template literal and writing to the DOM
@@ -70,3 +77,4 @@ pokemonRepository.getAll().forEach((pokemon) => {
 // objectName.emptyArray.shift()
 // //reverses items of the array
 // objectName.emptyArray.reverse();
+
