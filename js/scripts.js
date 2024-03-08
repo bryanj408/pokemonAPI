@@ -1,20 +1,49 @@
-pokemonList = [
-    { name: 'Bulbasaur', height: 2, types: ['Grass', ' Poison']},
-    { name: 'Charmander', height: 1, types: ['Fire']},
-    { name: 'Squirtle', height: .5, types: ['Water']}
-];
+//document.write can't parse objects in HTML for this. Must use console.log to test
 
-//loops through pokemonList using a template literal to inject strings and variables
-//Added <br> to seperate each object. \n does not display correctly on the DOM
-// for (let i = 0; i < pokemonList.length; i++) {
-//     let result = `${pokemonList[i].name} (Height: ${pokemonList[i].height}) (Types: ${pokemonList[i].types})<br>`;
-//     document.write(result);
-// }
+let pokemonRepository = (function() {
 
-pokemonList.forEach((pokemon) => {
+    pokemonList = [
+        { 
+            name: 'Bulbasaur', 
+            height: 2, 
+            types: ['Grass', ' Poison']
+        },
+        { 
+            name: 'Charmander', 
+            height: 1, 
+            types: ['Fire']
+        },
+        { 
+            name: 'Squirtle', 
+            height: .5, 
+            types: ['Water']
+        }
+    ];
+
+    function add(pokemon) {
+        pokemonList.push(pokemon);
+    }
+
+    function getAll() {
+        return pokemonList;
+    }
+
+    return {
+        add: add,
+        getAll: getAll
+    };
+
+})();
+
+pokemonRepository.add({name: 'Picachu', height: 2, types: ['lightning', 'ground']});
+
+//accesses pokemonRepository with getAll() and loops through pokemonList with forEach by
+//injecting specific details in the template literal and writing to the DOM
+pokemonRepository.getAll().forEach((pokemon) => {
     let result = `${pokemon.name} (Height: ${pokemon.height}) (Types: ${pokemon.types})<br>`;
-    document.write(result);
-})
+    document.write(result); 
+});
+
 
 
 
