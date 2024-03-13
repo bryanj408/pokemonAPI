@@ -28,6 +28,10 @@ let pokemonRepository = (function() {
         }
     }
 
+    function addListItem (pokemon) {
+
+    }
+
     function getAll() {
         return pokemonList;
     }
@@ -38,6 +42,7 @@ let pokemonRepository = (function() {
 
     return {
         add: add,
+        addListItem: addListItem,
         remove: remove,
         getAll: getAll
     };
@@ -47,12 +52,41 @@ let pokemonRepository = (function() {
 //accesses pokemonRepository with getAll() and loops through pokemonList with forEach by
 //injecting specific details in the template literal and writing to the DOM
 pokemonRepository.getAll().forEach((pokemon) => {
-    let result = `${pokemon.name} (Height: ${pokemon.height}) (Types: ${pokemon.types})<br>`;
-    document.write(result); 
+
+    let list = document.querySelector('ul');
+    list.classList.add('list-class');
+    let listItem = document.createElement('li');
+
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('button-class');
+    listItem.appendChild(button);
+    list.appendChild(listItem);
+
 });
 
 
 
+
+
+
+
+// let body = document.querySelector('body');
+// let container = document.createElement('container');
+// let addSomeText = document.createElement('h1');
+// addSomeText.classList.add('h1');
+
+// addSomeText.innerText = 'This is added text';
+// addSomeText.setAttribute('id', 'Hello');
+// addSomeText.setAttribute('id', 'new-id');
+// console.log(addSomeText.getAttribute('id'));
+
+
+// body.appendChild(container);
+// container.appendChild(addSomeText);
+// console.log(addSomeText.innerText);
+// //returns the element tag in uppercase
+// console.log(addSomeText.tagName);
 
 
 
