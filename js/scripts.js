@@ -37,9 +37,18 @@ let pokemonRepository = (function() {
         let button = document.createElement('button');
         button.innerText = pokemon.name;
         button.classList.add('button-class');
+        //pokemon parameter is passed from addListItem(pokemon)
+        button.addEventListener('click', function() {
+            showDetails(pokemon);
+        })
 
         listItem.appendChild(button);
         list.appendChild(listItem);
+    }
+
+    //logs pokemon details from eventListner from within addListItem() above ^^
+    function showDetails(pokemon) {
+        console.log(pokemon);
     }
 
     function getAll() {
@@ -53,8 +62,8 @@ let pokemonRepository = (function() {
     return {
         add: add,
         addListItem: addListItem,
-        remove: remove,
-        getAll: getAll
+        getAll: getAll,
+        remove: remove
     };
 
 })();
