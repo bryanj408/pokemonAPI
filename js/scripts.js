@@ -28,6 +28,7 @@ let pokemonRepository = (function() {
         }
     }
 
+    //creates ul and li and button per pokemon and logs details to console
     function addListItem(pokemon) {
         let list = document.querySelector('ul');
         list.classList.add('list-class');
@@ -37,18 +38,24 @@ let pokemonRepository = (function() {
         let button = document.createElement('button');
         button.innerText = pokemon.name;
         button.classList.add('button-class');
-        //pokemon parameter is passed from addListItem(pokemon)
-        button.addEventListener('click', function() {
-            showDetails(pokemon);
-        })
 
         listItem.appendChild(button);
         list.appendChild(listItem);
+
+        //function that holds eventListener for button
+        buttonEvent(button, pokemon);
     }
 
     //logs pokemon details from eventListner from within addListItem() above ^^
     function showDetails(pokemon) {
         console.log(pokemon);
+    }
+
+    //eventListener holding showDetails() that is passed to addListItem() to seperate code a little
+    function buttonEvent(button, pokemon) {
+        button.addEventListener('click', function() {
+            showDetails(pokemon);
+        })
     }
 
     function getAll() {
