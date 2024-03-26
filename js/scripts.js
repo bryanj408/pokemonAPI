@@ -72,7 +72,7 @@ let pokemonRepository = (function() {
         })
     }
 
-    //loadDeatils()
+    //fetches details called out from detailsUrl of API and is passed to showDetails()
     function loadDetails(item) {
         let url = item.detailsUrl;
         return fetch(url).then(function(response) {
