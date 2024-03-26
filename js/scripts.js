@@ -2,31 +2,16 @@
 
 let pokemonRepository = (function() {
 
-    pokemonList = [
-        { 
-            name: 'Bulbasaur', 
-            height: 2, 
-            types: ['Grass', ' Poison']
-        },
-        { 
-            name: 'Charmander', 
-            height: 1, 
-            types: ['Fire']
-        },
-        { 
-            name: 'Squirtle', 
-            height: .5, 
-            types: ['Water']
-        }
-    ];
+    let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     function add(pokemon) {
         if (typeof pokemon == 'object') {
             pokemonList.push(pokemon);
         } else {
-            console.log('Add an object this way: {name: String, height: int, types: [string, string]');
-        }
+            console.log('There was some trouble adding pokemon. Check add() or loadList()');
     }
+}
 
     //creates ul and li and button per pokemon and logs details to console
     function addListItem(pokemon) {
@@ -46,12 +31,15 @@ let pokemonRepository = (function() {
         buttonEvent(button, pokemon);
     }
 
-    //logs pokemon details from eventListner from within addListItem() above ^^
+    //logs pokemon details from eventListner in buttonEvent() and passes to addListItem()
+    //details are pulled from loadDetails()
     function showDetails(pokemon) {
-        console.log(pokemon);
+        loadDetails(pokemon).then(function() {
+            console.log(pokemon);
+        })
     }
 
-    //eventListener holding showDetails() that is passed to addListItem() to seperate code a little
+    //eventListener holding showDetails() that is passed to addListItem() to keep code clean
     function buttonEvent(button, pokemon) {
         button.addEventListener('click', function() {
             showDetails(pokemon);
@@ -66,21 +54,57 @@ let pokemonRepository = (function() {
         pokemonList.pop();
     }
 
+    //The LoadList() method will fetch data from the API, then add each Pokémon
+    //in the fetched data to pokemonList with the add function
+    function loadList() {
+        return fetch(apiUrl).then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            json.results.forEach(function(item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon);
+            });
+        }).catch(function(error) {
+            console.error(error);
+        })
+    }
+
+    //loadDeatils()
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function(response) {
+            return response.json();
+        }).then(function(details) {
+            item.imageUrl = details.sprites.front_default;
+            //double check back sprite is correct
+            item.imageUrl = details.sprites.back_default;
+            item.height = details.height;
+            item.types = details.types;
+        }).catch(function(error) {
+            console.error(error);
+        })
+    }
+
     return {
         add: add,
         addListItem: addListItem,
         getAll: getAll,
-        remove: remove
+        remove: remove,
+        loadList: loadList,
+        loadDetails: loadDetails
     };
-
 })();
 
 //accesses pokemonRepository with getAll() and loops through pokemonList with forEach by
 //calling on repository.addListItem to create each button with details
-pokemonRepository.getAll().forEach((pokemon) => {
-    pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function() {
+    pokemonRepository.getAll().forEach((pokemon) => {
+        pokemonRepository.addListItem(pokemon);
+    });
 });
-
 
 
 
