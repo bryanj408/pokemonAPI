@@ -1,0 +1,71 @@
+.button-class {
+    padding: 10px 32px;
+    margin: 5px;
+    background-color: white;
+}
+
+.list-class {
+    display: block;
+    text-align: center;    
+    list-style-type: none; /* gets rid of bullet points*/
+}
+
+#modal-container {
+    display: none;
+}
+
+#modal-container.is-visible {
+    position: fixed;
+    padding: 20px;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+
+    /* to show it above other content */
+    z-index: 999;
+
+    /* to allow scrolling if the screen is not high enough */
+    overflow: auto;
+
+    /* uses to center the modal */
+    display: grid;
+    text-align: center;
+}
+
+.modal {
+    margin: auto;
+    display: inline-block;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 15px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.modal-close {
+    float: right;
+    border: 0;
+    background: none;
+    color: #777;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pokemon-name {
+    text-align: center;
+}
+
+.img-front {
+    display: inline-block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.img-back {
+    display: inline-block;
+    margin-right: auto;
+    margin-left: auto; 
+}
