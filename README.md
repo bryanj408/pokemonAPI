@@ -7,7 +7,7 @@ This app shows a list of pokemon that will display a modal with more information
 - JavaScript
 - HTML
 - CSS
-- _coming soon_ Bootsrap 
+- Bootsrap _(coming soon)_ 
 
 ## Thing to Improve
 
