@@ -1,4 +1,9 @@
-.pokemon-list {
+.list-group {
+    margin-top: 100px;
+}
+
+
+/* .pokemon-list {
     margin-top: 70px;
 }
 
@@ -14,7 +19,7 @@
     list-style-type: none; /* gets rid of bullet points*/
 }
 
-#modal-container {
+/* #modal-container {
     display: none;
 }
 
@@ -29,17 +34,17 @@
     background: rgba(0, 0, 0, 0.5);
 
     /* to show it above other content */
-    z-index: 999;
+    /* z-index: 999; */
 
     /* to allow scrolling if the screen is not high enough */
-    overflow: auto;
+    /* overflow: auto; */
 
     /* uses to center the modal */
-    display: grid;
-    text-align: center;
+    /* display: grid;
+    text-align: center; */
 }
 
-.modal {
+/* .modal {
     margin: auto;
     display: inline-block;
     box-sizing: border-box;
@@ -47,9 +52,9 @@
     padding: 15px;
     width: 100%;
     max-width: 500px;
-}
+} */
 
-.modal-close {
+/* .modal-close {
     float: right;
     border: 0;
     background: none;
@@ -72,4 +77,4 @@
     display: inline-block;
     margin-right: auto;
     margin-left: auto; 
-}
+}  */
