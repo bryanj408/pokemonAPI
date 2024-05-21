@@ -30,7 +30,9 @@ let pokemonRepository = (function() {
             item.imgUrlFront = details.sprites.front_default;
             item.imgUrlBack = details.sprites.back_default;
             item.height = details.height;
+            item.weight = details.weight;
             item.types = details.types;
+            item.abilities = details.abilities;
         }).catch(function(error) {
             console.error(error);
         })
@@ -97,18 +99,27 @@ let pokemonRepository = (function() {
         imgElementBack.src = pokemon.imgUrlBack;
 
         let pokemonHeight = document.createElement('div');
-        pokemonHeight.innerText = pokemon.height;
+        pokemonHeight.innerText = `Height: ${pokemon.height}`;
+
+        let pokemonWeight = document.createElement('div');
+        pokemonWeight.innerText = `Weight: ${pokemon.weight}`;
 
         //Accessing array of objects from api and joining each type with a comma
         let pokemonTypes = document.createElement('div');
         let types = pokemon.types.map(item => item.type.name).join(', ');
-        pokemonTypes.innerText = types;
+        pokemonTypes.innerText = `Type: ${types}`;
+
+        let pokemonAbilities = document.createElement('div');
+        let abilities = pokemon.abilities.map(item => item.ability.name).join(', ');
+        pokemonAbilities.innerText = `Ability: ${abilities}`;
         
         modalTitle.appendChild(pokemonName);
         modalBody.appendChild(imgElementFront);
         modalBody.appendChild(imgElementBack);
         modalBody.appendChild(pokemonHeight);
+        modalBody.appendChild(pokemonWeight);
         modalBody.appendChild(pokemonTypes);
+        modalBody.appendChild(pokemonAbilities);
 
         $('#modalOpen').modal('show');
     }
