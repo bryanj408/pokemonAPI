@@ -1,6 +1,20 @@
 .pokemon-list {
     margin-top: 100px;
 }
+
+.pokemon-button {
+    box-sizing: border-box;
+    height: 150px;
+    width: 150px;
+}
+
+.img-front {
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+}
+
 /* 
 .button-class {
     padding: 10px 32px;
@@ -54,13 +68,13 @@
 }
 
 .img-front {
-    display: inline-block;
+    /* display: inline-block;
     margin-right: auto;
-    margin-left: auto;
-}
+    margin-left: auto; */
+/* }  */
 
-.img-back {
+/* .img-back {
     display: inline-block;
     margin-right: auto;
     margin-left: auto; 
-}   */
+}    */
