@@ -3,6 +3,11 @@ let pokemonRepository = (function() {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
+    //capitalize the first letter of a string
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     //LoadList() method will fetch data from the API, then add each Pokémon
     //in the fetched data to pokemonList with the add function
     function loadList() {
@@ -27,8 +32,8 @@ let pokemonRepository = (function() {
         return fetch(url).then(function(response) {
             return response.json();
         }).then(function(details) {
-            item.imgUrlFront = details.sprites.front_default;
-            item.imgUrlBack = details.sprites.back_default;
+            item.imgUrlFront = details.sprites.other.dream_world.front_default;
+            // item.imgUrlBack = details.sprites.other.showdown.back_default;
             item.height = details.height;
             item.weight = details.weight;
             item.types = details.types;
@@ -42,30 +47,33 @@ let pokemonRepository = (function() {
         if (typeof pokemon == 'object') {
             pokemonList.push(pokemon);
         } else {
-            console.log('There was some trouble adding pokemon. Check add() or loadList()');
+            console.log('There was some trouble adding pokemon.');
     }
 }
 
     //creates ul and li and button per pokemon and logs details to console
     function addListItem(pokemon) {
-        let list = document.querySelector('.pokemon-list');
-        list.classList.add('list-group');    
-        
-        let listItem = document.createElement('li');
-        listItem.classList.add('list-group-item','list-group-item-action'); 
-        listItem.setAttribute('role', 'listitem'); //set aria role
-    
+
+        let row = document.querySelector('.row');
+
+        let list = document.createElement('div');
+        list.classList.add('pokemon-list', 'col', 'col-md-4', 'd-flex', 'justify-content-center');
+
         let button = document.createElement('button');
-        button.classList.add('btn', 'btn-secondary'); //add bootstrap classes
+        button.classList.add('pokemon-button', 'btn', 'btn-lg', 'btn-warning', 'col', 'd-flex', 'justify-content-center', 'align-items-center'); //add bootstrap classes
         button.setAttribute('data-target', '#modalOpen');
         button.setAttribute('type', 'button');
         button.setAttribute('data-toggle', 'modal');
-        button.innerText = pokemon.name;
-        
-        listItem.append(button);
-        list.append(listItem);
+        button.innerText = capitalizeFirstLetter(pokemon.name);
 
-       
+        let image = document.createElement('img');
+        image.classList.add('img-front', 'd-flex', 'justify-content-center');
+        image.src = pokemon.imgUrlFront;
+        
+        button.append(image);
+        list.appendChild(button);
+        row.appendChild(list);
+        
         button.addEventListener('click', function() {
             showDetails(pokemon);
         })
@@ -80,7 +88,7 @@ let pokemonRepository = (function() {
     }
 
     function showModal(pokemon) {
-        let modalHeader = document.querySelector('.modal-header');
+        
         let modalTitle = document.querySelector('.modal-title');
         let modalBody = document.querySelector('.modal-body');
 
@@ -115,7 +123,7 @@ let pokemonRepository = (function() {
         
         modalTitle.appendChild(pokemonName);
         modalBody.appendChild(imgElementFront);
-        modalBody.appendChild(imgElementBack);
+        // modalBody.appendChild(imgElementBack);
         modalBody.appendChild(pokemonHeight);
         modalBody.appendChild(pokemonWeight);
         modalBody.appendChild(pokemonTypes);
@@ -148,7 +156,20 @@ pokemonRepository.loadList().then(function() {
 
 
 
+//jquery
+   // let list = $('<div>').addClass('pokemon-list list-item'); 
+    
+        // let button = $('<button>').addClass
+        //     ('btn btn-warning col-4')
+        //     .attr('data-toggle', 'modal')
+        //     .attr('data-target', '#modalOpen');
 
+
+
+        // button.append(img);
+        // button.append(span);
+        // list.append(button);
+        // $('.row').append(list);
 
 
 
@@ -177,6 +198,10 @@ pokemonRepository.loadList().then(function() {
     // function hideModal() {
     //     modalContainer.classList.remove('is-visible');
     // }
+
+    //from addListItem
+
+   
 
 //created modal with javascript
 
