@@ -32,8 +32,9 @@ let pokemonRepository = (function() {
         return fetch(url).then(function(response) {
             return response.json();
         }).then(function(details) {
-            item.imgUrlFront = details.sprites.other.dream_world.front_default;
-            // item.imgUrlBack = details.sprites.other.showdown.back_default;
+            item.imgUrlMain = details.sprites.other.dream_world.front_default;
+            item.imgUrlFront = details.sprites.front_default;
+            item.imgUrlBack = details.sprites.back_default;
             item.height = details.height;
             item.weight = details.weight;
             item.types = details.types;
@@ -53,31 +54,32 @@ let pokemonRepository = (function() {
 
     //creates ul and li and button per pokemon and logs details to console
     function addListItem(pokemon) {
+        loadDetails(pokemon).then(function() {
 
-        let row = document.querySelector('.row');
+            let row = document.querySelector('.row');
 
-        let list = document.createElement('div');
-        list.classList.add('pokemon-list', 'col', 'col-md-4', 'd-flex', 'justify-content-center');
-
-        let button = document.createElement('button');
-        button.classList.add('pokemon-button', 'btn', 'btn-lg', 'btn-warning', 'col', 'd-flex', 'justify-content-center', 'align-items-center'); //add bootstrap classes
-        button.setAttribute('data-target', '#modalOpen');
-        button.setAttribute('type', 'button');
-        button.setAttribute('data-toggle', 'modal');
-        button.innerText = capitalizeFirstLetter(pokemon.name);
-
-        let image = document.createElement('img');
-        image.classList.add('img-front', 'd-flex', 'justify-content-center');
-        image.src = pokemon.imgUrlFront;
-        
-        button.append(image);
-        list.appendChild(button);
-        row.appendChild(list);
-        
-        button.addEventListener('click', function() {
-            showDetails(pokemon);
+            let list = document.createElement('div');
+            list.classList.add('pokemon-list', 'col', 'col-md-4', 'd-flex', 'justify-content-center');
+    
+            let button = document.createElement('button');
+            button.classList.add('pokemon-button', 'btn', 'btn-lg', 'btn-light', 'col', 'd-flex', 'justify-content-center', 'align-items-center'); //add bootstrap classes
+            button.setAttribute('data-target', '#modalOpen');
+            button.setAttribute('type', 'button');
+            button.setAttribute('data-toggle', 'modal');
+            button.innerText = capitalizeFirstLetter(pokemon.name);
+    
+            let image = document.createElement('img');
+            image.classList.add('img-main', 'd-flex', 'justify-content-center');
+            image.src = pokemon.imgUrlMain;
+            
+            button.append(image);
+            list.appendChild(button);
+            row.appendChild(list);
+            
+            button.addEventListener('click', function() {
+                showDetails(pokemon);
+            })
         })
-
     }
 
     //passes loadDetails() to showModal()
@@ -123,7 +125,7 @@ let pokemonRepository = (function() {
         
         modalTitle.appendChild(pokemonName);
         modalBody.appendChild(imgElementFront);
-        // modalBody.appendChild(imgElementBack);
+        modalBody.appendChild(imgElementBack);
         modalBody.appendChild(pokemonHeight);
         modalBody.appendChild(pokemonWeight);
         modalBody.appendChild(pokemonTypes);
