@@ -3,7 +3,7 @@ let pokemonRepository = (function() {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-    //capitalize the first letter of a string
+    //capitalize the first letter of a string. string.slice(1) returns the rest of the string after charAt(0) 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
@@ -57,10 +57,10 @@ let pokemonRepository = (function() {
         loadDetails(pokemon).then(function() {
 
             let row = document.querySelector('.row');
-            row.classList.add('justify-content-center')
+            row.classList.add('justify-content-center');
 
             let list = document.createElement('div');
-            list.classList.add('pokemon-list', 'col-9', 'col-md-4', 'col-lg-3', 'm-1', 'd-flex', 'justify-content-center');
+            list.classList.add('pokemon-list', 'col-9', 'col-md-4', 'col-lg-3', 'm-1', 'd-flex');
     
             let button = document.createElement('button');
             button.classList.add('pokemon-button', 'btn', 'col', 'd-flex', 'justify-content-center', 'align-items-center'); //add bootstrap classes
@@ -91,15 +91,21 @@ let pokemonRepository = (function() {
     }
 
     function showModal(pokemon) {
-        
+    
         let modalTitle = document.querySelector('.modal-title');
+
+
         let modalBody = document.querySelector('.modal-body');
+        modalBody.classList.add(pokemon.name);
 
         modalTitle.innerText = ''; //clears title section each time
         modalBody.innerText = ''; //clears body section each time
 
         let pokemonName = document.createElement('h1');
-        pokemonName.innerText = pokemon.name;
+        pokemonName.innerText = capitalizeFirstLetter(pokemon.name);
+
+        let imgContainer = document.createElement('div');
+        imgContainer.classList.add('d-flex', 'justify-content-center');
 
         let imgElementFront = document.createElement('img');
         imgElementFront.classList.add('img-front');
@@ -125,8 +131,8 @@ let pokemonRepository = (function() {
         pokemonAbilities.innerText = `Ability: ${abilities}`;
         
         modalTitle.appendChild(pokemonName);
-        modalBody.appendChild(imgElementFront);
-        modalBody.appendChild(imgElementBack);
+        imgContainer.append(imgElementFront, imgElementBack)
+        modalBody.appendChild(imgContainer);
         modalBody.appendChild(pokemonHeight);
         modalBody.appendChild(pokemonWeight);
         modalBody.appendChild(pokemonTypes);
