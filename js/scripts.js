@@ -63,7 +63,7 @@ let pokemonRepository = (function() {
             list.classList.add('pokemon-list', 'col-9', 'col-md-4', 'col-lg-3', 'm-1', 'd-flex', 'justify-content-center');
     
             let button = document.createElement('button');
-            button.classList.add('pokemon-button', 'btn', 'btn-info', 'col', 'd-flex', 'justify-content-center', 'align-items-center'); //add bootstrap classes
+            button.classList.add('pokemon-button', 'btn', 'col', 'd-flex', 'justify-content-center', 'align-items-center'); //add bootstrap classes
             button.setAttribute('data-target', '#modalOpen');
             button.setAttribute('type', 'button');
             button.setAttribute('data-toggle', 'modal');
@@ -135,6 +135,25 @@ let pokemonRepository = (function() {
         $('#modalOpen').modal('show');
     }
 
+    //selects scroll button
+    let scrollButton = document.querySelector('#scrollToTopButton');
+
+    //listen for a scroll event and show/hide scroll button
+    window.onscroll = function() {
+        if (window.scrollY > 30) {
+            scrollButton.style.display = 'inline';
+        } else {
+            scrollButton.style.display = 'none';
+        }
+    }
+
+    //clicking scroll button brings you back to the top
+    scrollButton.addEventListener('click', function() {
+       window.scrollTo({
+        top: 0,
+        behavior: 'smooth'  
+       });
+    });
 
     function getAll() {
         return pokemonList;
