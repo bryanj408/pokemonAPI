@@ -57,22 +57,23 @@ let pokemonRepository = (function() {
         loadDetails(pokemon).then(function() {
 
             let row = document.querySelector('.row');
+            row.classList.add('justify-content-center')
 
             let list = document.createElement('div');
-            list.classList.add('pokemon-list', 'col', 'col-md-4', 'd-flex', 'justify-content-center');
+            list.classList.add('pokemon-list', 'col-9', 'col-md-4', 'col-lg-3', 'm-1', 'd-flex', 'justify-content-center');
     
             let button = document.createElement('button');
-            button.classList.add('pokemon-button', 'btn', 'btn-lg', 'btn-light', 'col', 'd-flex', 'justify-content-center', 'align-items-center'); //add bootstrap classes
+            button.classList.add('pokemon-button', 'btn', 'btn-info', 'col', 'd-flex', 'justify-content-center', 'align-items-center'); //add bootstrap classes
             button.setAttribute('data-target', '#modalOpen');
             button.setAttribute('type', 'button');
             button.setAttribute('data-toggle', 'modal');
             button.innerText = capitalizeFirstLetter(pokemon.name);
     
             let image = document.createElement('img');
-            image.classList.add('img-main', 'd-flex', 'justify-content-center');
+            image.classList.add('img-main', 'd-flex', 'me-2', 'justify-content-center', 'align-items-center');
             image.src = pokemon.imgUrlMain;
             
-            button.append(image);
+            button.prepend(image);
             list.appendChild(button);
             row.appendChild(list);
             
