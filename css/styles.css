@@ -57,6 +57,44 @@ body {
     width: 100px;
 }
 
+#scrollToTopButton {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 2%;
+    z-index: 99%;
+    border: none;
+    outline: none;
+    background-color: var(--button-color);
+    padding: 5px 13px;
+    border-radius: 100%;
+    font-size: 25px;
+}
+
+#scrollToTopButton.is-visible {
+    display: inline;
+}
+
+.navbar-brand:hover,
+.nav-link:hover {
+    animation-duration: .5s;
+    animation-name: color-change;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+}
+
+@keyframes color-change {
+    0% {
+        color: #edc655;
+    }
+    50% {
+        color: #fcffad
+    }
+    100% {
+        color: #f76414;
+    }
+}
 
 
 
