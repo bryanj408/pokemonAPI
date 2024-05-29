@@ -21,7 +21,9 @@ body {
 } */
 
 .navbar {
-    background-color: var(--navbar-color);
+    /* background-color: var(--navbar-color); */
+    background: linear-gradient(to right, #453A5E, #7A68A8);
+
 }
 
 .navbar-brand {
@@ -33,7 +35,7 @@ body {
 }
 
 .row {
-    margin-top: 120px;
+    margin-top: 100px;
 }
 
 .pokemon-button {
@@ -42,7 +44,8 @@ body {
     width: 150px;
     border: none;
     opacity: 95%;
-    background-color: var(--button-color);
+    /* background-color: var(--button-color); */
+    background: linear-gradient(to right, #544873, #7A68A8, #AD93ED);
 }
 
 .pokemon-button:hover {
