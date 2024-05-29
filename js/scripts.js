@@ -163,7 +163,9 @@ let pokemonRepository = (function() {
 
 
     //search field that filters pokemon by name
-    function searchPokemon(pokemon) {
+    function searchPokemon() {
+
+        //gets value from search bar and converts to lowercase
         let userInput = searchBar.value.toLowerCase();
 
         //filters through array and uses lower case to not be case-sensitive
