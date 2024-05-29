@@ -166,6 +166,7 @@ let pokemonRepository = (function() {
     function searchPokemon(pokemon) {
         let userInput = searchBar.value.toLowerCase();
 
+        //filters through array and uses lower case to not be case-sensitive
         let filteredPokemon = pokemonList.filter((pokemon) => {
             return pokemon.name.toLowerCase().includes(userInput);
         }); 
@@ -173,12 +174,14 @@ let pokemonRepository = (function() {
         let clearPokemonList = document.querySelector('.row');
         clearPokemonList.innerHTML = '';
 
+        //prevents user from clearing search results with enter key
         searchBar.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
             }
         });
 
+        //displays message if user cannot find pokemon/mispells name
         if (filteredPokemon.length === 0) {
             let message = "Sorry, this pokemon does not exist";
             clearPokemonList.innerText = message;
@@ -189,6 +192,7 @@ let pokemonRepository = (function() {
         }
     }
     
+    //grabs input field and listens for user input, passing input to searchPokemon()
     let searchBar = document.querySelector('#search-bar');
     searchBar.addEventListener('input', searchPokemon);
     
