@@ -161,6 +161,38 @@ let pokemonRepository = (function() {
        });
     });
 
+
+    //search field that filters pokemon by name
+    function searchPokemon(pokemon) {
+        let userInput = searchBar.value.toLowerCase();
+
+        let filteredPokemon = pokemonList.filter((pokemon) => {
+            return pokemon.name.toLowerCase().includes(userInput);
+        }); 
+
+        let clearPokemonList = document.querySelector('.row');
+        clearPokemonList.innerHTML = '';
+
+        searchBar.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        });
+
+        if (filteredPokemon.length === 0) {
+            let message = "Sorry, this pokemon does not exist";
+            clearPokemonList.innerText = message;
+        } else {
+            filteredPokemon.forEach((pokemon) => {
+                addListItem(pokemon);
+            })
+        }
+    }
+    
+    let searchBar = document.querySelector('#search-bar');
+    searchBar.addEventListener('input', searchPokemon);
+    
+
     function getAll() {
         return pokemonList;
     }
@@ -182,93 +214,3 @@ pokemonRepository.loadList().then(function() {
     });
 });
 
-
-
-//jquery
-   // let list = $('<div>').addClass('pokemon-list list-item'); 
-    
-        // let button = $('<button>').addClass
-        //     ('btn btn-warning col-4')
-        //     .attr('data-toggle', 'modal')
-        //     .attr('data-target', '#modalOpen');
-
-
-
-        // button.append(img);
-        // button.append(span);
-        // list.append(button);
-        // $('.row').append(list);
-
-
-
-// OLD JAVASCRIPT TO BUILD MODAL (keeping until transition to bootstrap modal complete)
-
-
-// function remove() {
-    //     pokemonList.pop();
-    // }
-
-  //closes modal if you click anywhere on the modalContainer
-    // modalContainer.addEventListener('click', (e) => {
-    //     let target = e.target;
-    //     if (target === modalContainer) {
-    //         hideModal();
-    //     }
-    // })
-
-    //allows user to hit escape to close modal
-    // window.addEventListener('keydown', (e) => {
-    //     if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-    //         hideModal();
-    //     }
-    // });
-
-    // function hideModal() {
-    //     modalContainer.classList.remove('is-visible');
-    // }
-
-    //from addListItem
-
-   
-
-//created modal with javascript
-
-  //clear all existing modal content
-            // modalContainer.innerHTML = '';
-
-            // let modal = document.createElement('div');
-            // modal.classList.add('modal');
-
-            // let closeButtonElement = document.createElement('button');
-            // closeButtonElement.classList.add('modal-close');
-            // closeButtonElement.innerText = 'Close';
-            // closeButtonElement.addEventListener('click', hideModal);
-
-            // let titleElement = document.createElement('h1');
-            // titleElement.classList.add('pokemon-name');
-            // titleElement.innerText = pokemon.name.toUpperCase();
-
-            
-            // let imgElementFront = document.createElement('img');
-            // imgElementFront.classList.add('img-front');
-            // imgElementFront.src = pokemon.imgUrlFront;
-
-            // let imgElementBack = document.createElement('img');
-            // imgElementBack.classList.add('img-back');
-            // imgElementBack.src = pokemon.imgUrlBack;
-
-            // let pokemonHeight = document.createElement('div');
-            // pokemonHeight.innerText = pokemon.height;
-
-            // let pokemonTypes = document.createElement('div');
-            // pokemonTypes.classList.add('pokemon-types');
-
-            // modal.appendChild(closeButtonElement);
-            // modal.appendChild(titleElement);
-            // modal.appendChild(imgElementFront);
-            // modal.appendChild(imgElementBack);
-            // modal.appendChild(pokemonHeight);
-            // modal.appendChild(pokemonTypes);
-            // modalContainer.appendChild(modal);
-
-            // modalContainer.classList.add('is-visible');
