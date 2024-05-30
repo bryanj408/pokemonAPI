@@ -26,7 +26,15 @@ body {
     color: var(--navlink-color);
 }
 
+.navbar-brand:visited {
+    color: var(--navlink-color);
+}
+
 .nav-link {
+    color: var(--navlink-color);
+}
+
+.nav-link:visited {
     color: var(--navlink-color);
 }
 
