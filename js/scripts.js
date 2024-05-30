@@ -94,18 +94,17 @@ let pokemonRepository = (function() {
     
         let modalTitle = document.querySelector('.modal-title');
 
-
-        let modalBody = document.querySelector('.modal-body');
-        modalBody.classList.add(pokemon.name);
+        let modalBody = document.querySelector('.modal-body');;
 
         modalTitle.innerText = ''; //clears title section each time
         modalBody.innerText = ''; //clears body section each time
 
         let pokemonName = document.createElement('h1');
+        pokemonName.classList.add('fs-3');
         pokemonName.innerText = capitalizeFirstLetter(pokemon.name);
 
         let imgContainer = document.createElement('div');
-        imgContainer.classList.add('d-flex', 'justify-content-center');
+        imgContainer.classList.add('img-container', 'd-flex', 'justify-content-center');
 
         let imgElementFront = document.createElement('img');
         imgElementFront.classList.add('img-front');
@@ -116,13 +115,16 @@ let pokemonRepository = (function() {
         imgElementBack.src = pokemon.imgUrlBack;
 
         let pokemonHeight = document.createElement('div');
+        pokemonHeight.classList.add('pokemon-height')
         pokemonHeight.innerText = `Height: ${pokemon.height}`;
 
         let pokemonWeight = document.createElement('div');
+        pokemonWeight.classList.add('pokemon-weight')
         pokemonWeight.innerText = `Weight: ${pokemon.weight}`;
 
         //Accessing array of objects from api and joining each type with a comma
         let pokemonTypes = document.createElement('div');
+        pokemonTypes.classList.add('pokemon-types')
         let types = pokemon.types.map(item => item.type.name).join(', ');
         pokemonTypes.innerText = `Type: ${types}`;
 
