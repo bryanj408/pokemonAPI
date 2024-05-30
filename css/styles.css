@@ -1,29 +1,25 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@424&family=Poetsen+One&family=Poppins&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 :root {
-    --navbar-color: #3E405E;
+    --navbar-color: linear-gradient(to right, #362E4A, #7A68A8);
+    --button-color: linear-gradient(to right, #544873, #7A68A8, #AD93ED);
+    --scroll-button: linear-gradient(to right, #292338, #7A68A8);
+    --modal-img-color: #E2D6FF;
     --navlink-color: #ffff;
-    --button-color: #6A6C9C;
-    --button-color-hover: #585B82;
+    --button-color-hover: #AD93ED;
     --body-color: #F5FFF2;
 }
 
 body {
     font-family: "Lato", sans-serif;
-    font-weight: 600;
+    font-weight: 1000;
     font-style: normal;
     background-color: var(--body-color);
 }
 
-/* .pokemon-background {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-} */
-
 .navbar {
-    /* background-color: var(--navbar-color); */
-    background: linear-gradient(to right, #453A5E, #7A68A8);
-
+    background: var(--navbar-color);
 }
 
 .navbar-brand {
@@ -40,23 +36,47 @@ body {
 
 .pokemon-button {
     box-sizing: border-box;
-    height: 150px;
+    height: 120px;
     width: 150px;
     border: none;
     opacity: 95%;
-    /* background-color: var(--button-color); */
-    background: linear-gradient(to right, #544873, #7A68A8, #AD93ED);
+    background: var(--button-color);
 }
 
 .pokemon-button:hover {
-    background-color: var(--button-color-hover);
-    transition: .5s linear;
-    /* color: #ffff; */
+    transition: .75s ease-out linear;
+    background: var(--button-color-hover);
+}
+
+.modal-content {
+    background: #F0EBFF;
+}
+
+.modal-body {
+    font-weight: 400;
+}
+
+.pokemon-height {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.pokemon-weight {
+    margin-bottom: 10px;
+}
+
+.pokemon-types {
+    margin-bottom: 10px;
 }
 
 .img-main {
     height: 100px;
     width: 100px;
+}
+
+.img-container {
+    background: var(--modal-img-color);
+    padding: 50px;
 }
 
 .img-front {
@@ -69,6 +89,10 @@ body {
     width: 150px;
 }
 
+.search-bar {
+    max-width: 300px;
+}
+
 #scrollToTopButton {
     display: none;
     position: fixed;
@@ -77,7 +101,7 @@ body {
     z-index: 99%;
     border: none;
     outline: none;
-    background-color: var(--button-color);
+    background: var(--button-color);
     padding: 5px 13px;
     border-radius: 100%;
     font-size: 25px;
