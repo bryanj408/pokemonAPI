@@ -1,7 +1,9 @@
 let pokemonRepository = (function() {
 
     let pokemonList = [];
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/';
+    let offset = 0;
+    let limit = 50;
 
     //capitalize the first letter of a string. string.slice(1) returns the rest of the string after charAt(0) 
     function capitalizeFirstLetter(string) {
@@ -11,7 +13,7 @@ let pokemonRepository = (function() {
     //LoadList() method will fetch data from the API, then add each Pokémon
     //in the fetched data to pokemonList with the add function
     function loadList() {
-        return fetch(apiUrl).then(function(response) {
+        return fetch(`${apiUrl}?offset=${offset}&limit=${limit}`).then(function(response) {
             return response.json();
         }).then(function(json) {
             json.results.forEach(function(item) {
@@ -163,6 +165,20 @@ let pokemonRepository = (function() {
        });
     });
 
+    //loads 50 pokemon at a time while user scrolls pokedex
+    window.onscroll = function() {
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
+            offset += limit;
+            loadList().then(function() {
+                getAll().slice(-limit).forEach(function(pokemon) {
+                    addListItem(pokemon);
+                    });
+                })
+                .catch(function(error) {
+                    console.error('We\'re having issues loading more pokemon', error);
+            })
+        }
+    };
 
     //search field that filters pokemon by name
     function searchPokemon() {
