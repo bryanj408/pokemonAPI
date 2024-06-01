@@ -96,7 +96,7 @@ let pokemonRepository = (function() {
     
         let modalTitle = document.querySelector('.modal-title');
 
-        let modalBody = document.querySelector('.modal-body');;
+        let modalBody = document.querySelector('.modal-body');
 
         modalTitle.innerText = ''; //clears title section each time
         modalBody.innerText = ''; //clears body section each time
