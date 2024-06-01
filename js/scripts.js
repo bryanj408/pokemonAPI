@@ -10,10 +10,13 @@ let pokemonRepository = (function() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    //This will go back as a template literal in loadList() with apiUrl once load function is fixed
+    // `${apiUrl}?offset=${offset}&limit=${limit}`
+
     //LoadList() method will fetch data from the API, then add each Pokémon
     //in the fetched data to pokemonList with the add function
     function loadList() {
-        return fetch(`${apiUrl}?offset=${offset}&limit=${limit}`).then(function(response) {
+        return fetch(apiUrl).then(function(response) {
             return response.json();
         }).then(function(json) {
             json.results.forEach(function(item) {
