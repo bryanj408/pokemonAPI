@@ -1,7 +1,7 @@
 let pokemonRepository = (function() {
 
     let pokemonList = [];
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/';
     let offset = 0;
     let limit = 50;
 
@@ -10,13 +10,10 @@ let pokemonRepository = (function() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    //This will go back as a template literal in loadList() with apiUrl once load function is fixed
-    // `${apiUrl}?offset=${offset}&limit=${limit}`
-
     //LoadList() method will fetch data from the API, then add each Pokémon
     //in the fetched data to pokemonList with the add function
     function loadList() {
-        return fetch(apiUrl).then(function(response) {
+        return fetch(`${apiUrl}?offset=${offset}&limit=${limit}`).then(function(response) {
             return response.json();
         }).then(function(json) {
             json.results.forEach(function(item) {
@@ -148,41 +145,38 @@ let pokemonRepository = (function() {
         $('#modalOpen').modal('show');
     }
 
-    //loads 50 pokemon at a time while user scrolls pokedex
-    // window.onscroll = function() {
-    //     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
-    //         offset += limit;
-    //         loadList().then(function() {
-    //             getAll().slice(-limit).forEach(function(pokemon) {
-    //                 addListItem(pokemon);
-    //                 });
-    //             })
-    //             .catch(function(error) {
-    //                 console.error('We\'re having issues loading more pokemon', error);
-    //         })
-    //     }
-    // };
 
-
-    //selects scroll button
     let scrollButton = document.querySelector('#scrollToTopButton');
 
-    //listen for a scroll event and show/hide scroll button
+    // loads 50 pokemon at a time while user scrolls pokedex
     window.onscroll = function() {
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
+            offset += limit;
+            loadList().then(function() {
+                getAll().slice(-limit).forEach(function(pokemon) {
+                    addListItem(pokemon);
+                });
+            }).catch(function(error) {
+                console.error('We\'re having issues loading more pokemon', error);
+            })
+        }
+            
+        //scroll event and show/hide scroll button
         if (window.scrollY > 30) {
             scrollButton.style.display = 'inline';
         } else {
             scrollButton.style.display = 'none';
         }
-    }
+    };
 
     //clicking scroll button brings you back to the top
     scrollButton.addEventListener('click', function() {
-       window.scrollTo({
-        top: 0,
-        behavior: 'smooth'  
-       });
-    });
+        window.scrollTo({
+         top: 0,
+         behavior: 'smooth'  
+        });
+     });
+    
 
     //search field that filters pokemon by name
     function searchPokemon() {
